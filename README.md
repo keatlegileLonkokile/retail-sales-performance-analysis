@@ -4,7 +4,7 @@ A business analyst project. Take a year of raw retail sales data, work out what'
 
 ## Scenario
 
-You're a business analyst at **Acewind Retail**, a made up chain of 8 stores across 5 SA regions selling five product categories. Leadership has one ask. Tell us what's working, what isn't and what we should do about it, using a year of sales data from August 2025 to July 2026.
+You're a business analyst at **Acewind Retail**, a made up chain of 8 stores across 9 SA regions selling five product categories. Leadership has one ask. Tell us what's working, what isn't and what we should do about it, using a year of sales data from August 2025 to July 2026.
 
 The goal isn't just to summarise the numbers. It's to find specific findings you can back up, like a declining store, a category that's underperforming in one region, a category with thin margins and a seasonal pattern and turn each one into a real recommendation. Every number in the workbook comes from a formula, not a number typed in by hand.
 
