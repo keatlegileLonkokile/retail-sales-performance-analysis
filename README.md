@@ -1,10 +1,10 @@
 # Retail Sales Performance Analysis
 
-A business analyst project: take a year of raw retail sales data, find out what's actually going on across regions, stores, categories, and products, and turn it into a formula-driven Excel report a manager could open, trust, and act on.
+A business analyst project: take a year of raw retail sales data, find out what's actually going on across regions, stores, categories and products, and turn it into a formula-driven Excel report a manager could open, trust and act on.
 
 ## Scenario
 
-You're a business analyst at **Northwind Retail**, a fictional chain of 8 stores across 5 US regions selling five product categories. Leadership has one ask: "Tell us what's working, what isn't, and what we should do about it" — using a year of transaction-level sales data (Aug 2025 - Jul 2026).
+You're a business analyst at **Acewind Retail**, a fictional chain of 8 stores across 5 US regions selling five product categories. Leadership has one ask: "Tell us what's working, what isn't and what we should do about it" — using a year of transaction-level sales data (Aug 2025 - Jul 2026).
 
 The goal isn't just to summarize the numbers — it's to find the specific, defensible findings (a declining store, an underperforming category-region combination, a thin-margin category, a seasonal pattern) and turn each one into a concrete recommendation, backed by a workbook where every number is a live formula rather than a pasted-in result.
 
@@ -55,8 +55,8 @@ Open `output/Sales_Performance_Report.xlsx` in Excel, Google Sheets, or LibreOff
 
 `data/sales_data.csv` is **synthetically generated** (`scripts/generate_sales_data.py`) — no real company, stores, or products. It's built with a few deliberate patterns so the analysis has real signal to find, not noise:
 
-- **Miami** loses revenue steadily across the year (simulating a new local competitor)
-- **Dallas** specifically underperforms in the Sports & Outdoors category (weak regional demand for that category only — not a store-wide problem)
+- **Johannesburg** loses revenue steadily across the year (simulating a new local competitor)
+- **Capetown** specifically underperforms in the Sports & Outdoors category (weak regional demand for that category only — not a store-wide problem)
 - **Electronics** spikes company-wide in November/December (holiday shopping)
 - **Home & Kitchen** runs on a thinner margin than every other category (a pricing/cost issue)
 
