@@ -1,94 +1,94 @@
 # Retail Sales Performance Analysis
 
-A business analyst project: take a year of raw retail sales data, find out what's actually going on across regions, stores, categories and products, and turn it into a formula-driven Excel report a manager could open, trust and act on.
+A business analyst project. Take a year of raw retail sales data, work out what's really going on across regions, stores, categories and products, and turn it into an Excel report a manager could open, trust and act on.
 
 ## Scenario
 
-You're a business analyst at **Acewind Retail**, a fictional chain of 8 stores across 5 US regions selling five product categories. Leadership has one ask: "Tell us what's working, what isn't and what we should do about it" — using a year of transaction-level sales data (Aug 2025 - Jul 2026).
+You're a business analyst at **Northwind Retail**, a made up chain of 8 stores across 5 US regions selling five product categories. Leadership has one ask. Tell us what's working, what isn't, and what we should do about it, using a year of sales data from August 2025 to July 2026.
 
-The goal isn't just to summarize the numbers — it's to find the specific, defensible findings (a declining store, an underperforming category-region combination, a thin-margin category, a seasonal pattern) and turn each one into a concrete recommendation, backed by a workbook where every number is a live formula rather than a pasted-in result.
+The goal isn't just to summarize the numbers. It's to find specific findings you can back up, like a declining store, a category that's underperforming in one region, a category with thin margins, and a seasonal pattern, and turn each one into a real recommendation. Every number in the workbook comes from a formula, not a number typed in by hand.
 
 ## Approach
 
-1. **Data**: Generate a realistic transaction dataset (2,400 rows: store x product x month) with `pandas`/`numpy`.
-2. **Explore**: Run a quick pandas pass (`scripts/analyze.py`) to sanity-check the data and confirm findings before committing to them.
-3. **Build**: Construct a multi-sheet Excel workbook (`scripts/build_workbook.py`, `openpyxl`) where every summary number is a live formula (`SUMIFS`, `INDEX`/`MATCH`, `LARGE`/`SMALL`, `AVERAGE`) referencing the raw data — nothing is hardcoded from Python except the transactions themselves.
-4. **Recalculate**: Run the workbook through LibreOffice headless to compute cached formula values (9,864 formulas, 0 errors) so it opens correctly in Excel/Sheets without a manual "recalculate all."
-5. **Report**: An Insights & Recommendations sheet with a live "Key Metrics" table plus five specific, numbered findings and recommendations.
+1. **Data**: Build a realistic transaction dataset (2,400 rows, one row per store, product and month) using `pandas` and `numpy`.
+2. **Explore**: Run a quick pandas script (`scripts/analyze.py`) to check the data makes sense before trusting any findings.
+3. **Build**: Build a multi sheet Excel workbook (`scripts/build_workbook.py`, `openpyxl`) where every summary number is a live formula (`SUMIFS`, `INDEX`/`MATCH`, `LARGE`/`SMALL`, `AVERAGE`) pulling from the raw data. Nothing is hardcoded from Python except the raw transactions themselves.
+4. **Recalculate**: Run the workbook through LibreOffice to compute the formula values (9,864 formulas, zero errors) so it opens correctly straight away in Excel or Sheets.
+5. **Report**: An Insights & Recommendations sheet with a live key metrics table plus five specific, numbered findings and recommendations.
 
 ## Project structure
 
 ```
 retail-sales-performance-analysis/
 ├── data/
-│   └── sales_data.csv                    # synthetic transaction-level data
+│   └── sales_data.csv                    # synthetic transaction level data
 ├── scripts/
 │   ├── generate_sales_data.py            # builds the synthetic dataset
-│   ├── analyze.py                        # quick pandas exploration / sanity check
-│   └── build_workbook.py                 # builds the formula-driven Excel report
+│   ├── analyze.py                        # quick pandas exploration and sanity check
+│   └── build_workbook.py                 # builds the formula driven Excel report
 ├── output/
 │   └── Sales_Performance_Report.xlsx     # the deliverable
 ├── requirements.txt
 └── README.md
 ```
 
-## Setup & usage
+## Setup and usage
 
 ```bash
 git clone <your-repo-url>
 cd retail-sales-performance-analysis
 pip install -r requirements.txt
 
-# (optional) regenerate the synthetic dataset
+# optional: regenerate the synthetic dataset
 python3 scripts/generate_sales_data.py
 
-# (optional) quick console analysis
+# optional: quick console analysis
 python3 scripts/analyze.py
 
 # build the Excel report
 python3 scripts/build_workbook.py
 ```
 
-Open `output/Sales_Performance_Report.xlsx` in Excel, Google Sheets, or LibreOffice — every sheet recalculates from the `Raw Data` tab if you change any number.
+Open `output/Sales_Performance_Report.xlsx` in Excel, Google Sheets or LibreOffice. Every sheet recalculates from the Raw Data tab if you change any number.
 
 ## About the sample data
 
-`data/sales_data.csv` is **synthetically generated** (`scripts/generate_sales_data.py`) — no real company, stores, or products. It's built with a few deliberate patterns so the analysis has real signal to find, not noise:
+`data/sales_data.csv` is made up (`scripts/generate_sales_data.py` builds it). No real company, stores or products. It's built with a few patterns on purpose, so there's something real to find:
 
-- **Johannesburg** loses revenue steadily across the year (simulating a new local competitor)
-- **Capetown** specifically underperforms in the Sports & Outdoors category (weak regional demand for that category only — not a store-wide problem)
-- **Electronics** spikes company-wide in November/December (holiday shopping)
-- **Home & Kitchen** runs on a thinner margin than every other category (a pricing/cost issue)
+- **Miami** loses revenue steadily across the year, simulating a new local competitor
+- **Dallas** underperforms specifically in Sports & Outdoors. Weak demand for that one category, not a store wide problem
+- **Electronics** spikes company wide in November and December, holiday shopping
+- **Home & Kitchen** runs on a thinner margin than every other category, a pricing or cost issue
 
 ## Workbook contents
 
 | Sheet | What it shows |
 |---|---|
-| Raw Data | All 2,400 transactions, with Revenue/Cost/Profit/Margin as formulas |
-| Regional Summary | Revenue/cost/profit/margin by region, with a chart |
-| Category Summary | Same, by category, with a margin chart |
-| Monthly Trend | Total vs. Electronics revenue by month, with a trend line chart |
-| Store Performance | H1 vs. H2 revenue per store (`SUMIFS` with date-range criteria) with a clustered bar chart — this is what surfaces Miami's decline |
-| Product Summary | Revenue/profit/margin per product, plus live Top-5 / Bottom-5 tables (`LARGE`/`SMALL` + `INDEX`/`MATCH`) |
-| Insights & Recommendations | A live "Key Metrics" table (top/bottom region, most-declining store, thinnest-margin category, holiday lift — all formula-driven) plus five written findings and recommendations |
+| Raw Data | All 2,400 transactions, with Revenue, Cost, Profit and Margin as formulas |
+| Regional Summary | Revenue, cost, profit and margin by region, with a chart |
+| Category Summary | The same, by category, with a margin chart |
+| Monthly Trend | Total revenue vs Electronics revenue by month, with a trend line chart |
+| Store Performance | First half vs second half revenue per store, using SUMIFS with date range criteria, with a clustered bar chart. This is what surfaces Miami's decline |
+| Product Summary | Revenue, profit and margin per product, plus live top 5 and bottom 5 tables using LARGE, SMALL, INDEX and MATCH |
+| Insights & Recommendations | A live key metrics table (top and bottom region, most declining store, thinnest margin category, holiday lift, all formula driven) plus five written findings and recommendations |
 
 ## Key findings
 
-**Total FY revenue:** ~$1.73M | **Total FY profit:** ~$743K | **Overall margin:** ~43%
+**Total revenue for the year:** around R1.73 million. **Total profit:** around R743,000. **Overall margin:** around 43%.
 
-1. **Miami is in a steady, accelerating decline.** Revenue fell ~43% from H1 to H2 — the steepest drop of any store, while its regional peers held steady. Recommend an on-the-ground review (competitor activity, pricing, foot traffic) and a targeted local promotion before considering a footprint change.
-2. **Dallas is dramatically underperforming in Sports & Outdoors specifically** — about 75% below the average of other stores in that category alone, while normal everywhere else. Recommend an assortment/placement audit for that category rather than a store-wide response.
-3. **Home & Kitchen carries the thinnest margin** of any category (~29% vs. 53-59% for Apparel and Beauty & Personal Care). Recommend a supplier/cost review and testing a modest price increase on the highest-volume SKUs.
-4. **Electronics spikes sharply in November/December** — recommend building this into inventory and staffing plans ahead of Q4, plus a cross-sell push for accessories/warranties during that window.
-5. **Apparel and Beauty & Personal Care are the strongest all-around performers** (solid revenue, highest margins) — recommend protecting their shelf space/marketing spend and using their pricing approach as a template for the weaker categories.
+1. **Miami is in a steady decline that's getting worse.** Revenue fell about 43% from the first half of the year to the second half, the steepest drop of any store, while every other store in the region held steady. Recommend an on the ground review of competitor activity, pricing and foot traffic, plus a local promotion, before considering anything bigger like closing the store.
+2. **Dallas is badly underperforming in Sports & Outdoors specifically.** About 75% below the average of the other stores in that one category, while everything else at that store is normal. Recommend an assortment and shelf placement audit for that category rather than a store wide response.
+3. **Home & Kitchen has the thinnest margin of any category**, around 29% against 53 to 59% for Apparel and Beauty & Personal Care. Recommend a supplier and cost review, and testing a modest price increase on the highest volume products.
+4. **Electronics spikes sharply in November and December.** Recommend building this into inventory and staffing plans ahead of the fourth quarter instead of reacting to it, plus a cross sell push for accessories and warranties during that window.
+5. **Apparel and Beauty & Personal Care are the strongest performers overall**, solid revenue and the highest margins. Recommend protecting their shelf space and marketing budget, and using their pricing approach as a template when fixing the weaker categories.
 
 ## Possible extensions
 
-- Add a Power Query / Power BI version for a live, refreshable dashboard instead of a static workbook.
-- Customer-level data (loyalty program) to segment performance by customer type, not just store/category.
-- A pricing elasticity test on Home & Kitchen SKUs to validate finding #3 before rolling out a price change.
-- Automate the monthly refresh so this becomes a recurring report rather than a one-off.
+- Add a Power Query or Power BI version so the dashboard refreshes on its own instead of being a static file
+- Bring in customer level data (like a loyalty program) to look at performance by customer type, not just store or category
+- Run a pricing test on Home & Kitchen products to check finding 3 before rolling out a price change
+- Automate the monthly refresh so this becomes a recurring report instead of a one off
 
 ## Disclaimer
 
-All data in this repository is synthetically generated for educational/portfolio purposes. No real company, stores, employees, or customers are represented.
+All data in this repository is made up, for learning and portfolio purposes only. No real company, stores, employees or customers are represented.
