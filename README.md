@@ -1,6 +1,6 @@
 # Retail Sales Performance Analysis
 
-A business analyst project. Take a year of raw retail sales data, work out what's really going on across regions, stores, categories and products and turn it into an Excel report a manager could open, trust and act on.
+A business analyst project. Take a year of raw retail sales data, work out what's really going on across provinces, stores, categories and products and turn it into an Excel report a manager could open, trust and act on.
 
 ## Scenario
 
